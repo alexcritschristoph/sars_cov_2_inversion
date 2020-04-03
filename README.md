@@ -1,14 +1,17 @@
 ### Reproducible analyses for rejecting rare genomic inversions in SARS-CoV-2
 
-**Conclusion from below: I believe the recombination events seen here are sequencing artifacts and do not represent real intrapatient viral variation.**
+**Conclusion from below: The recombination events seen here are highly likely to be sequencing artifacts and do not represent real intrapatient viral variation in SARS-CoV-2 infection**
 
+### Background
 
 A recent preprint proposed genomic evidence for intra-patient recombination of the SARS-CoV-2 virus, available at the link below:
 https://www.biorxiv.org/content/10.1101/2020.03.27.009480v1
 
-In particular, the authors proposed 5 genomic recombination inversions based on denovo assemblies of very small (<200 bp) contigs in SPADES. The hypothesis was that while these recombinations are not the dominant genotype in the samples (they are at very low coverage), they represent some small fraction of the viral population that underwent recombination during infection of the patient. The authors make the case that these inversions are indicative of a high frequency of recombination for the virus that may have epidemiological implications.
+In particular, the authors proposed 5 genomic recombination inversions based on de novo assemblies of very small (<200 bp) contigs in SPADES. The hypothesis was that while these recombinations are not the dominant genotype in the samples (they are at very low coverage), they represent some small fraction of the viral population that underwent recombination during infection of the patient. The authors make the case that these inversions are indicative of a high frequency of recombination for the virus that may have epidemiological implications.
 
 Two of these inversions were well supported by > 20 reads and occurred at similar locations in the S protein gene in two different patients (the location for both of these inversions is about 23956-24088 in the reference genome available in this repository). This was an intriguing possibility, especially considering they would likely have an effect on the S protein, and worth investigating further.
+
+### Methods
 
 I copied the inversion sequences from their paper, and these two proposed inversion sequences are in the file `inversion_sequences.fna` in this repository.
 
@@ -17,6 +20,8 @@ https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR10903401
 https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR10903402
 
 As far as I can tell, these samples were deeply sequenced without any amplification or targeted capture - human and bacterial reads were (mostly) removed. 
+
+## Results
 
 The first thing I wanted to do was check to see if I could replicate the preprint's main result, which was assembling a denovo contig with the proposed inversion. This was easy enough with two assemblers, megahit and metaSPADES:
 ```
@@ -44,7 +49,7 @@ k141_994	MN908947	99.997	29837	1	0	88	29924	31	29867	0.0	55094
 k141_994	MN908947	97.895	95	2	0	1	95	202	108	1.45e-41	165
 ```
 
-For both samples, we don't see any contig matching the proposed inversion at the ~24 Kb location. The same was true of the metaSPADES analysis - so, I was unable to replicate obtaining the inversion by denovo assembly.
+For both samples, we don't see any contig matching the proposed inversion at the ~24 Kb location. The same was true of the metaSPADES analysis - so, I was unable to replicate obtaining the inversion by de novo assembly.
 
 However, I was curious as to whether the authors had used different assembly settings that allowed them to assemble the inversion (they don't specify). And, I was curious about the reads that they show supporting the inversions - they do show many reads mapping to the inversion in their figure. 
 
@@ -82,9 +87,10 @@ What does this site look like in the correct reference? Completely different:
 
 ![Figure 2][Figure2]
 
-
 The same is true for the 3402 sample inversion:
 
 ![Figure 3][Figure3]
 
-**Conclusion: I believe the recombination events seen here are sequencing artifacts and do not represent real intrapatient viral variation.**
+### Conclusion
+
+The recombination events described in this manuscript are highly likely sequencing artifacts and do not represent real intrapatient viral variation in SARS-CoV-2 infection. 
